@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -13,7 +14,6 @@
 <body>
   <a class="skip-link" href="#konten-utama">Langsung ke konten utama</a>
   <div class="site-shell">
-    <!-- Komponen 1: navigasi semantik; tombol menu aktif di layar kecil. -->
     <aside class="sidebar" id="sidebar" aria-label="Navigasi samping">
       <a class="brand" href="#konten-utama" aria-label="TemuKampus, ke awal halaman">
         <span class="brand-mark" aria-hidden="true">T</span>
@@ -43,7 +43,6 @@
     </aside>
 
     <div class="page-area">
-      <!-- Komponen 2: header, pencarian simulasi, dan toggle menu. -->
       <header class="topbar">
         <div class="topbar-heading">
           <button id="menu-toggle" class="icon-button menu-toggle" type="button" aria-label="Buka menu navigasi" aria-controls="sidebar" aria-expanded="false">
@@ -72,7 +71,6 @@
           </section>
 
           <div class="content-grid">
-            <!-- Komponen 3 + 4: pilihan jenis laporan dan form HTML5 dengan validasi JS. -->
             <section class="report-card" aria-labelledby="report-card-heading">
               <h2 id="report-card-heading" class="sr-only">Formulir laporan barang</h2>
               <form id="report-form" novalidate>
@@ -121,12 +119,14 @@
                   <div class="field full-width">
                     <label for="description">Deskripsi umum <span class="required" aria-hidden="true">*</span></label>
                     <textarea id="description" name="description" rows="3" minlength="15" maxlength="500" required placeholder="Tulis ciri barang yang boleh dipublikasikan. Jangan tuliskan data pribadi atau ciri rahasia." aria-describedby="description-hint description-error"></textarea>
-                    <div class="field-meta"><small id="description-hint">Minimal 15 karakter, maksimal 500 karakter.</small><small><span id="char-count">0</span>/500</small></div>
+                    <div class="field-meta">
+                      <small id="description-hint">Minimal 15 karakter, maksimal 500 karakter.</small>
+                      <small><span id="char-count">0</span>/500</small>
+                    </div>
                     <p class="field-error" id="description-error" aria-live="polite"></p>
                   </div>
                 </div>
 
-                <!-- Komponen 5: input berkas dengan pratinjau dan pemeriksaan jenis/ukuran. -->
                 <div class="upload-block" id="image-upload">
                   <div class="upload-copy">
                     <span class="upload-icon" aria-hidden="true">
@@ -142,26 +142,37 @@
                   <p class="field-error upload-error" id="photo-error" aria-live="polite"></p>
                   <div class="file-preview" id="file-preview" hidden>
                     <img id="photo-preview" alt="Pratinjau foto barang yang dipilih">
-                    <div><strong id="file-name"></strong><small id="file-size"></small></div>
+                    <div>
+                      <strong id="file-name"></strong>
+                      <small id="file-size"></small>
+                    </div>
                     <button id="remove-photo" type="button" class="remove-photo" aria-label="Hapus foto terpilih">Hapus</button>
                   </div>
                 </div>
 
                 <div class="form-bottom">
-                  <label class="consent"><input type="checkbox" id="privacy-agreement" required><span>Saya memastikan laporan tidak memuat data pribadi atau ciri rahasia barang.</span></label>
+                  <label class="consent">
+                    <input type="checkbox" id="privacy-agreement" required>
+                    <span>Saya memastikan laporan tidak memuat data pribadi atau ciri rahasia barang.</span>
+                  </label>
                   <p class="field-error" id="privacy-agreement-error" aria-live="polite"></p>
                   <div class="submission-actions">
                     <button class="reset-button" id="reset-button" type="reset">Reset</button>
-                    <button class="submit-button" type="submit"><span>Kirim Laporan</span><span aria-hidden="true">→</span></button>
+                    <button class="submit-button" type="submit">
+                      <span>Kirim Laporan</span>
+                      <span aria-hidden="true">→</span>
+                    </button>
                   </div>
                 </div>
               </form>
             </section>
 
             <div class="right-rail">
-              <!-- Komponen 6: informasi keselamatan dipisahkan dari formulir. -->
               <aside class="tips-card" id="tips" aria-labelledby="tips-heading">
-                <div class="tips-header"><span class="tips-symbol" aria-hidden="true">✦</span><h2 id="tips-heading">Tips laporan yang aman</h2></div>
+                <div class="tips-header">
+                  <span class="tips-symbol" aria-hidden="true">✦</span>
+                  <h2 id="tips-heading">Tips laporan yang aman</h2>
+                </div>
                 <ol>
                   <li><span>01</span><p>Ceritakan waktu dan lokasi umum.</p></li>
                   <li><span>02</span><p>Tambahkan foto barang yang aman dibagikan.</p></li>
@@ -171,12 +182,18 @@
               </aside>
               <section class="demo-card" aria-labelledby="demo-heading">
                 <div class="demo-icon" aria-hidden="true">!</div>
-                <div><h2 id="demo-heading">Pengujian prototipe</h2><p>Formulir hanya simulasi frontend. Data tidak dikirim ke server atau disimpan permanen.</p></div>
+                <div>
+                  <h2 id="demo-heading">Pengujian prototipe</h2>
+                  <p>Formulir hanya simulasi frontend</p>
+                </div>
               </section>
               <section class="helper-card" aria-labelledby="helper-heading">
                 <h2 id="helper-heading">Bantu pengguna lain</h2>
                 <p>Detail umum membantu pencarian; bukti kepemilikan harus tetap privat.</p>
-                <div class="meter-label"><span>Kelengkapan formulir</span><strong id="completion-text">0%</strong></div>
+                <div class="meter-label">
+                  <span>Kelengkapan formulir</span>
+                  <strong id="completion-text">0%</strong>
+                </div>
                 <progress id="completion-meter" max="100" value="0">0%</progress>
               </section>
             </div>
@@ -189,12 +206,11 @@
   <div id="page-overlay" class="page-overlay" hidden></div>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
-  <!-- Komponen 7: ringkasan konfirmasi, tanpa menyimpan data di backend. -->
   <dialog class="success-dialog" id="success-dialog" aria-labelledby="dialog-heading" aria-describedby="dialog-description">
     <div class="dialog-symbol" aria-hidden="true">✓</div>
     <p class="dialog-kicker">SIMULASI BERHASIL</p>
     <h2 id="dialog-heading">Laporan siap ditinjau</h2>
-    <p id="dialog-description">Formulir lolos validasi. Ini hanya simulasi; tidak ada data yang dikirimkan ke server.</p>
+    <p id="dialog-description">Formulir lolos validasi. note : ini hanya simulasi.</p>
     <dl class="result-list" id="report-result"></dl>
     <button class="submit-button dialog-close" id="close-dialog" type="button">Kembali ke formulir</button>
   </dialog>
