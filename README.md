@@ -16,18 +16,6 @@ TemuKampus_Tugas_Implementasi/
     └── wireframe-buat-laporan.png  # Wireframe reference from Assignment 1, not an active UI element
 ```
 
-## Getting Started
-
-1. Download or clone the repository.
-2. Open `index.html` directly in your web browser, or start a local development server using Python:
-
-   ```bash
-   python -m http.server 8000
-   ```
-
-3. Open `http://localhost:8000` in your browser.
-4. Test the application by selecting **Lost Item** or **Found Item**, completing the report form, uploading a photo, and clicking **Submit Report**.
-
 ## Semantic HTML Components (Minimum of 5)
 
 | Component | File / Selector | Functionality |
