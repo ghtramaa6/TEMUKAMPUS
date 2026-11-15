@@ -1,74 +1,69 @@
-# TemuKampus — Implementasi Halaman Buat Laporan
+# TemuKampus — Report Submission Page Implementation
 
-Proyek frontend untuk **Tugas Implementasi Wireframe** dari aplikasi web **TemuKampus**, yaitu layanan pelaporan barang hilang dan barang temuan di lingkungan kampus.
+A frontend project developed for the **Wireframe Implementation Assignment** of **TemuKampus**, a web-based platform designed to help students report lost and found items within the campus environment.
 
-Halaman yang diimplementasikan adalah **Buat Laporan**, mengacu pada frame desktop Tugas 1 (1440 × 1024 px). Desain menggunakan sidebar, topbar, tombol pilihan jenis laporan, formulir, unggah foto, panel tips privasi, dan konfirmasi simulasi.
+## Technologies and Project Structure
 
-> **Batasan penting:** hanya frontend simulasi. Data tidak dikirim ke server, tidak tersimpan dalam database, dan tidak boleh dianggap sebagai laporan resmi kampus. Halaman lain di sidebar belum diimplementasikan dan menampilkan penjelasan saat diklik.
-
-## Teknologi dan struktur folder
-
-```
+```text
 TemuKampus_Tugas_Implementasi/
-├── index.html                 # Root document: HTML5 semantik
-├── styles.css                 # Tampilan, warna/spacing custom properties, responsivitas
-├── script.js                  # Validasi, jenis laporan, menu, foto, dialog, progress
-├── README.md                  # Deskripsi dan instruksi
+├── index.html                 # Root document: Semantic HTML5
+├── styles.css                 # Styling, CSS custom properties, and responsive design
+├── script.js                  # Form validation, report types, menu, photo upload, dialog, and progress
+├── README.md                  # Project description and instructions
 ├── assets/
-│   └── favicon.svg           # Ikon lokal
+│   └── favicon.svg           # Local application icon
 └── reference/
-    └── wireframe-buat-laporan.png  # Referensi Tugas 1, bukan elemen UI aktif
+    └── wireframe-buat-laporan.png  # Wireframe reference from Assignment 1, not an active UI element
 ```
 
-Tidak menggunakan framework, CDN, atau layanan pihak ketiga. Tidak diperlukan `npm install`.
+## Getting Started
 
-## Cara menjalankan
+1. Download or clone the repository.
+2. Open `index.html` directly in your web browser, or start a local development server using Python:
 
-1. Unduh atau *clone* repositori.
-2. Buka `index.html` secara langsung pada browser modern, **atau** jalankan server lokal:
    ```bash
    python -m http.server 8000
    ```
-3. Akses `http://localhost:8000`.
-4. Coba memilih **Barang Hilang** atau **Barang Temuan**, mengisi formulir, mengunggah foto, dan menekan **Kirim Laporan**.
 
-## Komponen HTML semantik (minimal 5)
+3. Open `http://localhost:8000` in your browser.
+4. Test the application by selecting **Lost Item** or **Found Item**, completing the report form, uploading a photo, and clicking **Submit Report**.
 
-| Komponen | Berkas/selector | Perilaku |
+## Semantic HTML Components (Minimum of 5)
+
+| Component | File / Selector | Functionality |
 |---|---|---|
-| Sidebar navigasi | `index.html #sidebar`, `#primary-nav` | Sidebar responsif; `script.js: toggleMenu()` |
-| Header dan pencarian cepat | `index.html .topbar`, `#quick-search` | Pencarian memberi notifikasi bahwa halaman belum diimplementasikan |
-| Pilihan jenis laporan | `index.html #report-kind` | Radio group; `script.js: setReportType()` mengubah label lokasi |
-| Formulir laporan | `index.html #report-form` | Validasi required, panjang deskripsi, tanggal, info privat; `submitReport()` |
-| Unggah dan pratinjau foto | `index.html #image-upload` | PNG/JPG/WebP, maksimal 3 MB; `validatePhoto()` dan `clearPhoto()` |
-| Tips laporan aman | `index.html #tips` | Daftar pedoman privasi dan keamanan yang selalu terlihat |
-| Dialog konfirmasi | `index.html #success-dialog` | Ringkasan data dan status simulasi; tidak menyimpan data |
+| Sidebar Navigation | `index.html #sidebar`, `#primary-nav` | Responsive sidebar controlled by `script.js: toggleMenu()` |
+| Header and Quick Search | `index.html .topbar`, `#quick-search` | Displays a notification indicating that the search page has not yet been implemented |
+| Report Type Selection | `index.html #report-kind` | Radio button group; `script.js: setReportType()` dynamically updates the location field label |
+| Report Submission Form | `index.html #report-form` | Validates required fields, description length, dates, and potentially sensitive personal information through `submitReport()` |
+| Photo Upload and Preview | `index.html #image-upload` | Supports PNG, JPG, and WebP files up to 3 MB; includes `validatePhoto()` and `clearPhoto()` |
+| Safe Reporting Tips | `index.html #tips` | Displays privacy and security guidelines that remain visible to users |
+| Confirmation Dialog | `index.html #success-dialog` | Displays a summary of the submitted report and confirms simulation status without storing any data |
 
-## Custom properties CSS
+## CSS Custom Properties
 
-Warna didefinisikan dalam `:root`, termasuk `--primary`, `--teal-bright`, `--accent`, `--bg`, dan `--text`. Spacing menggunakan token `--spacing-1` sampai `--spacing-5` (8, 16, 24, 32, 48 px). Layout memakai Grid dan Flexbox; media query mengadaptasi sidebar dan kolom form pada layar sempit.
+The application uses CSS custom properties defined within `:root` to maintain visual consistency and simplify future styling updates.
 
-## Pengujian manual
+The main color variables include:
 
-1. Klik **Kirim Laporan** saat kolom kosong: semua isian wajib menampilkan pesan.
-2. Isi data valid, centang persetujuan, lalu kirim: dialog ringkasan simulasi tampil.
-3. Ubah jenis ke **Barang Temuan**: label lokasi berubah menjadi **Lokasi barang ditemukan**.
-4. Pilih foto yang didukung dan berukuran maksimal 3 MB: pratinjau muncul; klik **Hapus** untuk melepasnya.
-5. Masukkan tanggal masa depan atau nomor telepon di deskripsi: validasi menolak.
-6. Coba lebar layar ponsel: tombol menu membuka/menutup sidebar.
+- `--primary`
+- `--teal-bright`
+- `--accent`
+- `--bg`
+- `--text`
 
-Pemeriksaan privasi melalui pola teks hanya bantuan awal dan **bukan** pengganti moderasi atau pemeriksaan manusia di aplikasi sungguhan.
+Spacing is managed using predefined design tokens, ranging from `--spacing-1` to `--spacing-5`, with values of **8, 16, 24, 32, and 48 pixels**.
 
-## Mengunggah ke GitHub (publik)
+The layout combines **CSS Grid and Flexbox** to create a structured and flexible interface. Media queries are implemented to ensure that the sidebar, form columns, and other interface components adapt properly to smaller screens.
 
-1. Masuk ke GitHub → **New repository**. Contoh nama: `temukampus-laporan-web`.
-2. Atur **Public** lalu buat repositori.
-3. Pilih **Add file → Upload files**; unggah **isi folder proyek** ini, bukan folder pembungkus ZIP, sehingga `index.html` berada di akar repositori.
-4. Commit perubahan. Pastikan `index.html`, `styles.css`, `script.js`, dan `README.md` terlihat di root.
-5. Salin tautan `https://github.com/USERNAME/temukampus-laporan-web` ke LMS setelah repositori benar-benar dibuat.
+## Manual Testing
 
-**Opsional GitHub Pages:** Settings → Pages → Build and deployment → Deploy from a branch → `main` / `(root)` → Save. Tunggu proses deploy berhasil lalu uji URL `https://USERNAME.github.io/temukampus-laporan-web/`.
+The following manual tests were conducted to verify the functionality and responsiveness of the application.
 
-## Kaitan dengan riset UX
-
-Kebutuhan mencari informasi terstruktur dan perlindungan data pribadi diturunkan dari rancangan riset pengguna TemuKampus. Fitur verifikasi detail kepemilikan berada di halaman lanjutan, sehingga laporan publik hanya memuat ciri umum. Statistik survei tahap awal belum diperlakukan sebagai hasil penelitian final.
+1. **Required Field Validation:** Click **Submit Report** with all fields empty. Validation messages should appear for every required field.
+2. **Successful Form Submission:** Enter valid information, select the consent checkbox, and submit the form. A confirmation dialog should display a summary of the simulated submission.
+3. **Dynamic Report Type Selection:** Switch the report type to **Found Item**. The location field label should automatically change to **Location Where the Item Was Found**.
+4. **Photo Upload and Preview:** Upload a supported image file smaller than or equal to 3 MB. The image preview should appear, and clicking **Remove** should clear the selected image.
+5. **Date and Privacy Validation:** Enter a future date or include a phone number in the description. The validation system should reject the input.
+6. **Responsive Navigation:** Open
+   
