@@ -1,57 +1,150 @@
-# TemuKampus — Report Submission Page Implementation
 
-A frontend project developed for the **Wireframe Implementation Assignment** of **TemuKampus**, a web-based platform designed to help students report lost and found items within the campus environment.
+# TemuKampus - Lost and Found Reporting Website
 
-## Technologies and Project Structure
+## Project Overview
+
+TemuKampus is a web-based prototype designed to help students report lost and found items on campus.
+
+This project implements the **Create Report (Buat Laporan)** page based on a previously designed desktop wireframe.
+
+The website is developed using HTML, CSS, and JavaScript, focusing on responsive design, form validation, user interaction, and data privacy awareness.
+
+## Features
+
+- **Responsive Sidebar Navigation:** Provides access to the main navigation menu and adapts to smaller screens.
+- **Report Type Selection:** Allows users to choose between Lost Item and Found Item reports.
+- **Report Form:** Collects item names, categories, locations, incident dates, and general descriptions.
+- **Form Validation:** Checks required fields, input lengths, dates, and common patterns of sensitive information.
+- **Image Upload and Preview:** Supports PNG, JPG, and WebP images with a maximum file size of 3 MB.
+- **Form Completion Indicator:** Displays the percentage of required information completed.
+- **Submission Confirmation:** Shows a report summary after successful validation.
+- **Notification Messages:** Provides feedback for unavailable pages and incomplete form fields.
+
+## Technologies Used
+
+| Technology | Purpose |
+|------------|---------|
+| HTML5 | Semantic structure and form elements |
+| CSS3 | Styling, layout, and responsive design |
+| JavaScript | Form validation and interactive features |
+| GitHub | Source code management |
+| GitHub Pages | Static website hosting |
+
+## Project Structure
 
 ```text
-TemuKampus_Tugas_Implementasi/
-├── index.html                 # Root document: Semantic HTML5
-├── styles.css                 # Styling, CSS custom properties, and responsive design
-├── script.js                  # Form validation, report types, menu, photo upload, dialog, and progress
-├── README.md                  # Project description and instructions
-├── assets/
-│   └── favicon.svg           # Local application icon
-└── reference/
-    └── wireframe-buat-laporan.png  # Wireframe reference from Assignment 1, not an active UI element
+TEMUKAMPUS/
+├── index.html
+├── styles.css
+├── script.js
+├── README.md
+├── TESTING.md
+├── preview-desktop.png
+└── preview-mobile.png
 ```
 
-## Semantic HTML Components (Minimum of 5)
+### File Descriptions
 
-| Component | File / Selector | Functionality |
-|---|---|---|
-| Sidebar Navigation | `index.html #sidebar`, `#primary-nav` | Responsive sidebar controlled by `script.js: toggleMenu()` |
-| Header and Quick Search | `index.html .topbar`, `#quick-search` | Displays a notification indicating that the search page has not yet been implemented |
-| Report Type Selection | `index.html #report-kind` | Radio button group; `script.js: setReportType()` dynamically updates the location field label |
-| Report Submission Form | `index.html #report-form` | Validates required fields, description length, dates, and potentially sensitive personal information through `submitReport()` |
-| Photo Upload and Preview | `index.html #image-upload` | Supports PNG, JPG, and WebP files up to 3 MB; includes `validatePhoto()` and `clearPhoto()` |
-| Safe Reporting Tips | `index.html #tips` | Displays privacy and security guidelines that remain visible to users |
-| Confirmation Dialog | `index.html #success-dialog` | Displays a summary of the submitted report and confirms simulation status without storing any data |
+- `index.html` — Contains the main page structure, navigation, report form, and confirmation dialog.
+- `styles.css` — Defines colors, typography, spacing, layout, and responsive breakpoints.
+- `script.js` — Handles form validation, sidebar navigation, image previews, and submission interactions.
+- `README.md` — Provides project documentation and setup instructions.
+- `TESTING.md` — Contains testing notes and validation scenarios.
+- `preview-desktop.png` — Shows the desktop interface preview.
+- `preview-mobile.png` — Shows the mobile interface preview.
 
-## CSS Custom Properties
+An optional `assets/` directory can be used to store additional website resources, such as a favicon.
 
-The application uses CSS custom properties defined within `:root` to maintain visual consistency and simplify future styling updates.
+## How to Run the Project
 
-The main color variables include:
+### Option 1: Run Locally
 
-- `--primary`
-- `--teal-bright`
-- `--accent`
-- `--bg`
-- `--text`
+1. Open the GitHub repository:
 
-Spacing is managed using predefined design tokens, ranging from `--spacing-1` to `--spacing-5`, with values of **8, 16, 24, 32, and 48 pixels**.
+   https://github.com/ghtramaa6/TEMUKAMPUS
 
-The layout combines **CSS Grid and Flexbox** to create a structured and flexible interface. Media queries are implemented to ensure that the sidebar, form columns, and other interface components adapt properly to smaller screens.
+2. Click **Code** and select **Download ZIP**.
 
-## Manual Testing
+3. Extract the ZIP file to a folder on your computer.
 
-The following manual tests were conducted to verify the functionality and responsiveness of the application.
+4. Open the extracted project folder.
 
-1. **Required Field Validation:** Click **Submit Report** with all fields empty. Validation messages should appear for every required field.
-2. **Successful Form Submission:** Enter valid information, select the consent checkbox, and submit the form. A confirmation dialog should display a summary of the simulated submission.
-3. **Dynamic Report Type Selection:** Switch the report type to **Found Item**. The location field label should automatically change to **Location Where the Item Was Found**.
-4. **Photo Upload and Preview:** Upload a supported image file smaller than or equal to 3 MB. The image preview should appear, and clicking **Remove** should clear the selected image.
-5. **Date and Privacy Validation:** Enter a future date or include a phone number in the description. The validation system should reject the input.
-6. **Responsive Navigation:** Open
-   
+5. Make sure `index.html`, `styles.css`, and `script.js` are located in the same directory.
+
+6. Double-click `index.html` to open the website in a browser.
+
+Supported browsers include Google Chrome, Microsoft Edge, and Mozilla Firefox.
+
+### Option 2: Run Using Visual Studio Code
+
+1. Open Visual Studio Code.
+2. Select **File > Open Folder**.
+3. Choose the TemuKampus project folder.
+4. Install the **Live Server** extension if it is not already installed.
+5. Right-click `index.html`.
+6. Select **Open with Live Server**.
+
+The website will open in your default browser.
+
+### Option 3: Access GitHub Pages
+
+The website can also be accessed through GitHub Pages after deployment has been enabled.
+
+**Live Demo:**
+
+https://ghtramaa6.github.io/TEMUKAMPUS/
+
+## Testing
+
+The following scenarios can be used to verify the website functionality.
+
+| Test Case | Expected Result |
+|-----------|-----------------|
+| Submit an empty form | Required field validation messages appear |
+| Select Found Item | The location label changes accordingly |
+| Enter a future date | The form displays a date validation error |
+| Enter a description shorter than 15 characters | A validation message appears |
+| Upload a supported image | The selected image preview is displayed |
+| Upload an image larger than 3 MB | The file is rejected |
+| Remove an uploaded image | The image preview is cleared |
+| Submit a valid form | A confirmation dialog displays the report summary |
+| Open the website on a mobile device | The layout adapts and the sidebar can be toggled |
+
+## Design Considerations
+
+The interface follows several UI/UX design principles:
+
+- **Visual Hierarchy:** Important information and primary actions are clearly emphasized.
+- **Consistency:** Reusable colors, spacing, and typography improve readability.
+- **Responsive Design:** CSS Grid, Flexbox, and media queries allow the layout to adapt to different screen sizes.
+- **User Feedback:** Validation messages and notifications help users understand the results of their actions.
+- **Accessibility:** Semantic HTML elements, labels, and ARIA attributes improve usability.
+- **Privacy Awareness:** Users are reminded not to publish personal information or confidential ownership details.
+
+## Project Limitations
+
+This project is a frontend prototype developed for academic purposes.
+
+The report submission process is simulated using JavaScript. No backend server, database, or permanent data storage is implemented.
+
+Uploaded images are previewed locally in the browser and are not uploaded to a server.
+
+The sensitive information detection feature uses basic pattern matching and does not guarantee complete protection against accidental disclosure.
+
+Other navigation pages are not yet implemented.
+
+## Repository
+
+**GitHub Repository:**
+
+https://github.com/ghtramaa6/TEMUKAMPUS
+
+**GitHub Pages:**
+
+https://ghtramaa6.github.io/TEMUKAMPUS/
+
+## Academic Purpose
+
+This project was developed as part of a UI/UX wireframe implementation assignment in 2026.
+
+The main objective is to translate a desktop wireframe into a functional, responsive webpage using semantic HTML, external CSS, and JavaScript.
