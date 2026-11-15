@@ -1,4 +1,11 @@
 
+/*
+ * TemuKampus - Report Page Interactions
+ * Controls navigation, validation, report types, image previews,
+ * form progress, and submission confirmation.
+ * This is a frontend prototype without permanent data storage.
+ */
+
 "use strict";
 
 const form = document.querySelector("#report-form");
@@ -25,11 +32,11 @@ const fieldIds = [
 
 const getField = (id) => document.getElementById(id);
 
+// Display temporary notification messages.
 function showToast(message) {
   const toast = getField("toast");
 
   window.clearTimeout(toastTimeout);
-
   toast.textContent = message;
   toast.hidden = false;
 
@@ -38,6 +45,7 @@ function showToast(message) {
   }, 4500);
 }
 
+// Toggle the responsive sidebar and update accessibility attributes.
 function toggleMenu(forceOpen) {
   const open = typeof forceOpen === "boolean"
     ? forceOpen
@@ -54,7 +62,6 @@ function toggleMenu(forceOpen) {
 }
 
 menuToggle.addEventListener("click", () => toggleMenu());
-
 overlay.addEventListener("click", () => toggleMenu(false));
 
 document.addEventListener("keydown", (event) => {
@@ -67,6 +74,7 @@ sidebar.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => toggleMenu(false));
 });
 
+// Display a notification when an unavailable page is selected.
 document.querySelectorAll("[data-unavailable]").forEach((button) => {
   button.addEventListener("click", () => {
     toggleMenu(false);
@@ -77,18 +85,17 @@ document.querySelectorAll("[data-unavailable]").forEach((button) => {
   });
 });
 
+// Prevent navigation when the search feature is not available.
 document.getElementById("quick-search").addEventListener("submit", (event) => {
   event.preventDefault();
-
-  showToast(
-    "Fitur pencarian belum diimplementasikan."
-  );
+  showToast("Fitur pencarian belum diimplementasikan.");
 });
 
+// Update the location label based on the selected report type.
 function setReportType() {
   const type = form.elements.reportType.value;
-
   const locationLabel = document.getElementById("location-label");
+
   const labelText = type === "temuan"
     ? "Lokasi barang ditemukan "
     : "Lokasi terakhir terlihat ";
@@ -113,6 +120,7 @@ typeInputs.forEach((input) => {
 
 setReportType();
 
+// Set the maximum incident date to the current local date.
 const today = new Date();
 
 const localToday = [
@@ -123,6 +131,7 @@ const localToday = [
 
 dateInput.max = localToday;
 
+// Display field validation errors.
 function setError(id, message) {
   const field = getField(id);
   const error = getField(`${id}-error`);
@@ -138,6 +147,7 @@ function setError(id, message) {
   }
 }
 
+// Manage validation for the privacy agreement.
 function setConsentError(message) {
   const field = getField("privacy-agreement");
 
@@ -150,10 +160,13 @@ function setConsentError(message) {
   }
 }
 
+// Detect common personal information patterns in public text.
+// This check cannot guarantee complete detection of sensitive data.
 function containsSensitiveInfo(value) {
   return /\b(?:\+62|62|08)[\s.\-]?(?:\d[\s.\-]?){8,13}\b|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b|\b(?:NIM|NPM)\s*[:#-]?\s*\d{6,}\b/i.test(value);
 }
 
+// Validate required fields, input length, date, and sensitive information.
 function validateField(id) {
   const field = getField(id);
   const value = field.value.trim();
@@ -182,6 +195,7 @@ function validateField(id) {
   return !message;
 }
 
+// Clear the selected image and release its temporary object URL.
 function clearPhoto() {
   if (previewUrl) {
     URL.revokeObjectURL(previewUrl);
@@ -200,6 +214,7 @@ function clearPhoto() {
   updateCompletion();
 }
 
+// Validate uploaded image format and size before displaying the preview.
 function validatePhoto() {
   const file = photoInput.files[0];
 
@@ -254,9 +269,9 @@ function validatePhoto() {
 }
 
 photoInput.addEventListener("change", validatePhoto);
-
 getField("remove-photo").addEventListener("click", clearPhoto);
 
+// Calculate the completion percentage from required fields and consent.
 function updateCompletion() {
   const completed =
     fieldIds.filter((id) => Boolean(getField(id).value.trim())).length +
@@ -269,6 +284,7 @@ function updateCompletion() {
   getField("completion-meter").textContent = `${percentage}%`;
 }
 
+// Update validation and completion status when users edit the form.
 fieldIds.forEach((id) => {
   const field = getField(id);
 
@@ -276,7 +292,6 @@ fieldIds.forEach((id) => {
     if (field.hasAttribute("aria-invalid")) {
       validateField(id);
     }
-
     updateCompletion();
   });
 
@@ -284,7 +299,6 @@ fieldIds.forEach((id) => {
     if (field.hasAttribute("aria-invalid")) {
       validateField(id);
     }
-
     updateCompletion();
   });
 });
@@ -294,11 +308,13 @@ getField("privacy-agreement").addEventListener("change", () => {
   updateCompletion();
 });
 
+// Update the live description character counter.
 descriptionInput.addEventListener("input", () => {
   getField("char-count").textContent =
     String(descriptionInput.value.length);
 });
 
+// Validate the form and display a simulated submission summary.
 function submitReport(event) {
   event.preventDefault();
 
@@ -352,28 +368,17 @@ function submitReport(event) {
         ? "Barang Hilang"
         : "Barang Temuan"
     ],
-    [
-      "Nama barang",
-      getField("item-name").value.trim()
-    ],
-    [
-      "Kategori",
-      getField("category").value
-    ],
-    [
-      "Lokasi",
-      getField("location").value.trim()
-    ],
-    [
-      "Tanggal",
-      getField("event-date").value
-    ]
+    ["Nama barang", getField("item-name").value.trim()],
+    ["Kategori", getField("category").value],
+    ["Lokasi", getField("location").value.trim()],
+    ["Tanggal", getField("event-date").value]
   ];
 
   const resultList = getField("report-result");
 
   resultList.replaceChildren();
 
+  // Build the confirmation summary using safe text nodes.
   rows.forEach(([label, value]) => {
     const item = document.createElement("div");
     const term = document.createElement("dt");
@@ -395,6 +400,7 @@ getField("close-dialog").addEventListener("click", () => {
   dialog.close();
 });
 
+// Restore default labels, previews, and validation states after reset.
 form.addEventListener("reset", () => {
   window.setTimeout(() => {
     clearPhoto();
@@ -404,7 +410,6 @@ form.addEventListener("reset", () => {
     });
 
     setConsentError("");
-
     getField("char-count").textContent = "0";
 
     setReportType();
@@ -412,6 +417,7 @@ form.addEventListener("reset", () => {
   }, 0);
 });
 
+// Release the temporary image URL when leaving the page.
 window.addEventListener("pagehide", () => {
   if (previewUrl) {
     URL.revokeObjectURL(previewUrl);
