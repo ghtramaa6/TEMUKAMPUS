@@ -72,7 +72,7 @@ document.querySelectorAll("[data-unavailable]").forEach((button) => {
     toggleMenu(false);
 
     showToast(
-      `Halaman ${button.dataset.unavailable} belum diimplementasikan. Tugas ini berfokus pada halaman Buat Laporan.`
+      `Halaman ${button.dataset.unavailable} belum diimplementasikan.`
     );
   });
 });
@@ -81,7 +81,7 @@ document.getElementById("quick-search").addEventListener("submit", (event) => {
   event.preventDefault();
 
   showToast(
-    "Fitur pencarian tersedia pada rancangan Figma; implementasi tugas ini hanya halaman Buat Laporan."
+    "Fitur pencarian belum diimplementasikan."
   );
 });
 
