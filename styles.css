@@ -245,7 +245,7 @@ progress::-moz-progress-bar { background: var(--teal-bright); border-radius: 100
   .result-list div { grid-template-columns: 95px 1fr; }
 }
 
-/* Respect users who prefer reduced motion */
+/* Respect users who prefer reduce motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
